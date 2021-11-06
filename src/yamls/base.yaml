@@ -1,0 +1,43 @@
+main:
+  seed: 0
+  trn_bs: 256
+  val_bs: 128
+  save_path: ../result/
+  resume:
+  pretrain:
+  preprocess: False
+dataset:
+  root: ../input/ventilator-pressure-prediction/
+  train_csv_path: train.csv
+  test_csv_path: test.csv
+  train_load_path: train_process.csv
+  test_load_path: test_process.csv
+  split: [0]
+  cont_cols: &cont_cols [time_step, u_in, u_out]
+  cate_cols: &cate_cols [R, C]
+model:
+  model_type: &model_type lstm
+  cont_cols: *cont_cols
+  cate_cols: *cate_cols
+  hidden_size: 128
+  num_layers: 3
+  dropout: 0.
+loss:
+  lambdas:
+    lambda_masked_l1: 1.
+    lambda_masked_laplace: 1.
+trainer:
+  optimizer: AdamW # Adam / SGD / RAdam / AdamW
+  optim_state:
+    lr: 5.0e-3
+  scheduler: MultiStepLR
+  scheduler_state:
+    milestones: [400000, 500000]
+    gamma: 0.1
+  iterations: 550000
+  test_freq: 1000
+  save_freq: 25000
+  model_type: *model_type
+  max_grad_norm: 50
+  loss_mode: laplace
+criterion:

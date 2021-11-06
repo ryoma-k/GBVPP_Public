@@ -1,0 +1,2 @@
+trainer:
+  loss_mode: l1

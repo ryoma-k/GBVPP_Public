@@ -1,0 +1,10 @@
+tags
+__pycache__/
+exps/
+submits/
+*.memo
+/code-analysis/
+/input/
+/result*/
+diffs/
+pseudos/

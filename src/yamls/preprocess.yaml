@@ -1,0 +1,4 @@
+main:
+  preprocess: True
+dataset:
+  load_path: train_split.csv
